@@ -1,0 +1,76 @@
+<section data-ng-controller="EmployeesController" data-ng-init="find()">
+    <div class="page-header">
+        <h1><i class="glyphicon glyphicon-user"></i> Employees</h1>
+
+        <div class="row">
+            <div class="col-md-12">
+                <form>
+                    <div class="input-group input-group-lg">
+                        <input type="text" class="form-control" ng-model="searchEmployee"/>
+
+                        <div class="input-group-btn">
+                            <button class="btn btn-default">
+                                <span class="glyphicon glyphicon-filter"></span> Filter
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-md-4"
+         data-ng-repeat="employee in employees | filter:{firstName:searchEmployee}">
+        <div class="panel-wrapper">
+            <div class="panel-title">
+                <a data-ng-href="#!/employees/{{employee._id}}">
+                    <h3 class="list-group-item-heading">{{employee.firstName +" "+employee.lastName}}</h3>
+                </a> <span class="badge">{{employee.role}}</span> with
+                <span class="badge">{{employee.yrsOfExperience}}</span> yrs. of experience
+            </div>
+            <div class="panel-stage">
+                <div class="row">
+                    <div class="col-xs-8 col-md-6">
+                        <div class="panel-wrapper">
+                            <div class="panel-stage grey">
+                                <img src="/modules/employees/img/profile-male.png" ng-show="!employee.female"
+                                     class="img-responsive img-circle white">
+                                <img src="/modules/employees/img/profile-female.jpg" ng-show="employee.female"
+                                     class="img-responsive img-circle white">
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-xs-8 col-md-6">
+                        <div class="panel-wrapper">
+                            <div class="panel-title">
+                                Skills
+                            </div>
+                            <ul ng-repeat="skill in employee.skills">
+                                <li>{{skill}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-8 col-md-12">
+                    <div class="panel-wrapper">
+                        <div class="panel-title">
+                            Projects
+                        </div>
+                        <div class="panel-stage" ng-repeat="proj in employee.worksFor">
+                            {{proj.name}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-notes">
+                Works for Organization: {{employee.belongsTo.name}}
+            </div>
+        </div>
+    </div>
+
+    <div class="alert alert-warning text-center" data-ng-hide="!employees.$resolved || employees.length">
+        No Employees yet, why don't you <a href="/#!/employees/create">create one</a>?
+    </div>
+</section>

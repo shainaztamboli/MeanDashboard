@@ -1,0 +1,54 @@
+<section data-ng-controller="OrganizationsController" data-ng-init="find()">
+    <div class="page-header">
+        <h1><i class="glyphicon glyphicon-leaf"></i>  Organizations</h1>
+        <div class="row">
+            <div class="col-md-12">
+                <form>
+                    <div class="input-group input-group-lg">
+                        <input type="text" class="form-control" ng-model="searchOrganization"/>
+
+                        <div class="input-group-btn">
+                            <button class="btn btn-default">
+                                <span class="glyphicon glyphicon-filter"></span> Filter
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-4" data-ng-repeat="organization in organizations | filter:searchOrganization">
+            <div class="panel-wrapper">
+                <div class="panel-title">
+                    <a data-ng-href="#!/organizations/{{organization._id}}">
+                        <h4 class="list-group-item-heading" data-ng-bind="organization.name"></h4>
+                    </a>
+                </div>
+                <div class="panel-stage">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="panel-wrapper">
+                                <div class="panel-title">
+                                    Billable Vs Bench
+                                </div>
+                                <div class="panel-stage">
+                                    <canvas class="chart chart-bar" data="organization.data"
+                                            labels="organization.labels" legend="organization.legend" series="organization.series">
+                                    </canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="panel-notes">
+                    Owned by {{organization.owner.firstName}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!organizations.$resolved || organizations.length">
+        No Organizations yet, why don't you <a href="/#!/organizations/create">create one</a>?
+    </div>
+</section>

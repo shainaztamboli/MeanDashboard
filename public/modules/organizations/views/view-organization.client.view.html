@@ -1,0 +1,41 @@
+<section data-ng-controller="OrganizationsController" data-ng-init="findOne()">
+	<div class="page-header">
+		<h1><i class="glyphicon glyphicon-leaf"></i> {{organization.name}}</h1>
+	</div>
+	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == organization.user._id))">
+		<a class="btn btn-primary" href="/#!/organizations/{{organization._id}}/edit">
+			<i class="glyphicon glyphicon-edit"></i>
+		</a>
+		<a class="btn btn-primary" data-ng-click="remove();">
+			<i class="glyphicon glyphicon-trash"></i>
+		</a>
+	</div>
+	<div class="panel-wrapper">
+		<div class="panel-title">
+			<a href="/#!/organizations/{{organization._id}}/edit">
+				<h4 class="list-group-item-heading" data-ng-bind="organization.name"></h4>
+			</a>
+		</div>
+		<div class="panel-stage">
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="panel-wrapper">
+						<div class="panel-title">
+							Billable Vs Bench
+						</div>
+						<div class="panel-stage">
+							<canvas class="chart chart-bar" data="organization.data"
+									labels="organization.labels" legend="organization.legend" series="organization.series">
+							</canvas>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div class="panel-notes">
+			Owned by {{organization.owner.firstName}}
+		</div>
+	</div>
+	</div>
+</section>

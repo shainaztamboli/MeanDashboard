@@ -1,0 +1,67 @@
+<section data-ng-controller="ProjectsController" data-ng-init="find()">
+    <div class="page-header">
+        <h1><i class="glyphicon glyphicon-briefcase"></i>  Projects</h1>
+        <div class="row">
+            <div class="col-md-12">
+                <form>
+                    <div class="input-group input-group-lg">
+                        <input type="text" class="form-control" ng-model="searchProject"/>
+
+                        <div class="input-group-btn">
+                            <button class="btn btn-default">
+                                <span class="glyphicon glyphicon-filter"></span> Filter
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-4" data-ng-repeat="project in projects | filter:searchProject">
+            <div class="panel-wrapper">
+                <div class="panel-title">
+                    <a data-ng-href="#!/projects/{{project._id}}">
+                        <h4 data-ng-bind="project.name"></h4>
+                    </a>
+                </div>
+                <div class="panel-stage">
+                    <div class="row">
+                        <div class="col-xs-8 col-md-12">
+                            <div class="panel-wrapper">
+                                <div class="panel-title">
+                                    Billable People
+                                </div>
+                                <div class="panel-stage">
+                                    <canvas class="chart chart-doughnut" data="project.data"
+                                            labels="project.labels" legend="true"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="panel-wrapper">
+                                <div class="panel-title">
+                                    People
+                                </div>
+                                <div class="panel-stage">
+                                    {{project.owner.firstName +" "+project.owner.lastName}}
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-notes">
+                    Owned by {{project.belongsTo.name}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!projects.$resolved || projects.length">
+        No Projects yet, why don't you <a href="/#!/projects/create">create one</a>?
+    </div>
+</section>

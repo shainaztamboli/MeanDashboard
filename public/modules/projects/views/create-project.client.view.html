@@ -1,0 +1,107 @@
+<section data-ng-controller="ProjectsController">
+    <div class="page-header">
+        <h1><i class="glyphicon glyphicon-briefcase"></i> New Project</h1>
+    </div>
+    <div class="col-md-12">
+        <form class="form-horizontal" data-ng-submit="create()" novalidate>
+            <fieldset>
+                <div class="form-group">
+                    <label class="control-label" for="projectName">Project Name</label>
+
+                    <div class="controls">
+                        <input type="text" data-ng-model="name" id="projectName" class="form-control"
+                               placeholder="Project Name"
+                               required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="projectStartDate">Start Date</label>
+
+                    <div class="controls">
+                        <input type="date" data-ng-model="startDate" id="projectStartDate"
+                               class="form-control"
+                               placeholder="Project Start Date"
+                               required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="projectEndDate">End Date</label>
+
+                    <div class="controls">
+                        <input type="date" data-ng-model="endDate" id="projectEndDate"
+                               class="form-control"
+                               placeholder="Project End Date"
+                               required>
+                    </div>
+                </div>
+
+                <div class="controls" for="ongoingCheckBox">
+                    <label class="control-label">
+                        <input type="checkbox" data-ng-model="ongoing" id="ongoingCheckBox"> <b>On Going</b>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="projectTotalHeadCount">Total Head Count</label>
+
+                    <div class="controls">
+                        <input type="number" data-ng-model="totalHeadCount" id="projectTotalHeadCount"
+                               class="form-control"
+                               placeholder="Total Head Count"
+                               required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="projectBillableHeadCount">Billable Head Count</label>
+
+                    <div class="controls">
+                        <input type="number" data-ng-model="billableHeadCount" id="projectBillableHeadCount"
+                               class="form-control"
+                               placeholder="Billable Head Count"
+                               required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="projectBenchHeadCount">Bench Head Count</label>
+
+                    <div class="controls">
+                        <input type="number" data-ng-model="benchHeadCount" id="projectBenchHeadCount"
+                               class="form-control"
+                               placeholder="Bench Head Count"
+                               required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="projectBelongsTo">Organization</label>
+
+                    <div class="controls">
+                        <select class="form-control" id="projectBelongsTo" ng-model="belongsTo"
+                                ng-options="o._id as o.name for o in organizations"
+                                ng-change="setMembers(belongsTo)"></select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="projectOwners">Owner</label>
+
+                    <div class="controls">
+                        <select class="form-control" id="projectOwners" ng-model="owner"
+                                ng-options="o._id as o.firstName +' '+ o.lastName for o in members"></select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" class="btn btn-default">
+                </div>
+                <div data-ng-show="error" class="text-danger">
+                    <strong data-ng-bind="error"></strong>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</section>

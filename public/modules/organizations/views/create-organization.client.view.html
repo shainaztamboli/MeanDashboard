@@ -1,0 +1,65 @@
+<section data-ng-controller="OrganizationsController">
+    <div class="page-header">
+        <h1><i class="glyphicon glyphicon-leaf"></i> New Organization</h1>
+    </div>
+    <div class="col-md-12">
+        <form class="form-horizontal" data-ng-submit="create()" novalidate>
+            <fieldset>
+                <div class="form-group">
+                    <label class="control-label" for="orgName">Name</label>
+
+                    <div class="controls">
+                        <input type="text" data-ng-model="name" id="orgName" class="form-control"
+                               placeholder="Organization Name"
+                               required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="orgTotalHeadCount">Total Head Count</label>
+
+                    <div class="controls">
+                        <input type="number" data-ng-model="totalHeadCount" id="orgTotalHeadCount" class="form-control"
+                               placeholder="Total Head Count"
+                               required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="orgBillableHeadCount">Billable Head Count</label>
+
+                    <div class="controls">
+                        <input type="number" data-ng-model="billableHeadCount" id="orgBillableHeadCount"
+                               class="form-control"
+                               placeholder="Billable Head Count"
+                               required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="orgBenchHeadCount">Bench Head Count</label>
+                    <div class="controls">
+                        <input type="number" data-ng-model="benchHeadCount" id="orgBenchHeadCount"
+                               class="form-control"
+                               placeholder="Bench Head Count"
+                               required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="orgOwners">Owner</label>
+                    <div class="controls">
+                        <select class="form-control" id="orgOwners" ng-model="owner"
+                                ng-options="o._id as o.firstName +' '+ o.lastName for o in owners"></select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-default">
+                </div>
+                <div data-ng-show="error" class="text-danger">
+                    <strong data-ng-bind="error"></strong>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</section>

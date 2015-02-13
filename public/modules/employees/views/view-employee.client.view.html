@@ -1,0 +1,70 @@
+<section data-ng-controller="EmployeesController" data-ng-init="findOne()">
+    <br>
+
+    <div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == employee.user._id))">
+        <a class="btn btn-primary" href="/#!/employees/{{employee._id}}/edit">
+            <i class="glyphicon glyphicon-edit"></i>
+        </a>
+        <a class="btn btn-primary" data-ng-click="remove();">
+            <i class="glyphicon glyphicon-trash"></i>
+        </a>
+    </div>
+    <div class="panel-wrapper">
+        <div class="panel-title">
+            <a href="/#!/employees/{{employee._id}}/edit">
+                <h4 class="list-group-item-heading">{{employee.firstName +" "+employee.lastName}}</h4>
+            </a> <span class="badge">{{employee.role}}</span>
+        </div>
+        <div class="panel-stage">
+            <div class="row">
+                <div class="col-xs-8 col-md-6">
+                    <div class="panel-wrapper">
+                        <div class="panel-stage grey">
+                            <img src="/modules/employees/img/profile-male.png" ng-show="!employee.female"
+                                 class="img-responsive img-circle white">
+                            <img src="/modules/employees/img/profile-female.jpg" ng-show="employee.female"
+                                 class="img-responsive img-circle white">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-xs-8 col-md-6">
+                    <div class="panel-wrapper">
+                        <div class="panel-title">
+                            Role and Experience
+                        </div>
+                        <div class="panel-stage">
+                            {{employee.role}} with
+                            <span class="badge">{{employee.yrsOfExperience}}</span>
+
+                        </div>
+                    </div>
+                    <div class="panel-wrapper">
+                        <div class="panel-title">
+                            Projects
+                        </div>
+                        <div class="panel-stage" ng-repeat="project in employee.worksFor">
+                            {{project.name}}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="panel-wrapper">
+                        <div class="panel-title">
+                            Skills
+                        </div>
+                        <span class="badge" ng-repeat="skill in employee.skills">{{skill}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-notes">
+            Works for Organization: {{employee.belongsTo.name}}
+        </div>
+    </div>
+
+</section>
